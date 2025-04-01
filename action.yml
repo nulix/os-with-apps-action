@@ -4,10 +4,10 @@ branding:
   icon: 'terminal'
   color: 'gray-dark'
 runs:
-  using: 'docker'
-  image: 'docker://nulix/builder:os'
+  using: 'composite'
   steps:
     - name: Fetch base NULIX OS
+      using: 'docker://nulix/builder:os'
       shell: bash
       run: |
         source /nulix-os-venv/bin/activate
