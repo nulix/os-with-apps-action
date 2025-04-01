@@ -8,5 +8,6 @@ runs:
   steps:
     - name: Fetch base NULIX OS
       id: fetch-base-nulix-os
+      run: hostname && echo "!!!!!!!!!!"
       uses: 'docker://nulix/builder:os'
       shell: bash
