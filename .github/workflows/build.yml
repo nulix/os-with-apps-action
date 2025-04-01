@@ -1,0 +1,10 @@
+on: [push]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy NULIX OS with apps
+    steps:
+      - name: Build and Deploy NULIX OS with apps
+        id: build-and-deploy
+        uses: nulix/os-with-apps-action@v0.0.1-alpha
