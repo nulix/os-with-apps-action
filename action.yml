@@ -7,7 +7,7 @@ runs:
   using: 'composite'
   steps:
     - name: Fetch base NULIX OS
-      using: 'docker://nulix/builder:os'
+      uses: 'docker://nulix/builder:os'
       shell: bash
       run: |
         source /nulix-os-venv/bin/activate
