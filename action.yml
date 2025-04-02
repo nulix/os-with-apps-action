@@ -1,23 +1,21 @@
 name: 'Build NULIX OS with custom apps'
 description: 'Build and Deploy NULIX OS with custom apps'
+author: 'NULIX'
 branding:
   icon: 'terminal'
   color: 'gray-dark'
+inputs:
+  step_name:
+    description: 'Name of the step being executed.'
+    required: true
+  input_data:
+    description: 'Data to process in the step.'
+    required: false
+    default: 'default data'
+outputs:
+  step_output:
+    description: 'Output from the step.'
 runs:
-  using: 'composite'
-  steps:
-    - name: Set GitHub Path
-      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
-      shell: bash
-      env:
-        GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - name: Fetch base NULIX OS
-      uses: 'docker://nulix/builder:os'
-      id: fetch-base-os
-      run: entrypoint.sh fetch-base-os
-      shell: bash
-    - name: Inject custom apps
-      uses: 'docker://nulix/builder:os'
-      id: inject-apps
-      run: entrypoint.sh inject-apps
-      shell: bash
+  using: 'docker'
+  image: 'docker://nulix/builder:os'
+  entrypoint: 'entrypoint.sh'
