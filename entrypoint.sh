@@ -4,8 +4,6 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-STEP="do_$INPUT_STEP_NAME"
-
 do_fetch-base-os() {
   source /nulix-os-venv/bin/activate
   west init -m https://github.com/nulix/nulix-os.git nulix-os
@@ -31,5 +29,5 @@ do_inject-apps() {
 }
 
 # Execute the step
-echo "Running step: $STEP"
-$STEP
+echo "Running step: $INPUT_STEP_NAME"
+do_$INPUT_STEP_NAME
