@@ -1,5 +1,8 @@
 on: [push]
 
+env:
+  NULIX_OS_VER: 1.3.0
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -28,6 +31,9 @@ jobs:
           machine: 'rpi3'
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy NULIX OS with apps
       - name: Upload OS image
         id: upload-os-image
         uses: actions/upload-artifact@v4
