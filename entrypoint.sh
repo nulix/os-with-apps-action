@@ -39,6 +39,7 @@ do_fetch_base_os() {
 do_inject_apps() {
   cd nulix-os
   cp ../$COMPOSE_FILE rootfs/apps
+  echo '------------------' && ll rootfs/apps && cat rootfs/apps/$COMPOSE_FILE && echo '------------------'
   MACHINE=$MACHINE DISTRO=$DISTRO source tools/setup-environment
   OSTREE_COMMIT_MSG="Added custom compose apps"
   nulix build ostree-repo
