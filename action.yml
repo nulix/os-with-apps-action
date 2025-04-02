@@ -6,15 +6,15 @@ branding:
   color: 'gray-dark'
 inputs:
   step_name:
-    description: 'Name of the step being executed.'
+    description: 'Name of the step being executed'
     required: true
-  input_data:
-    description: 'Data to process in the step.'
+  machine:
+    description: 'Machine name'
     required: false
-    default: 'default data'
+    default: 'rpi3'
 outputs:
   step_output:
-    description: 'Output from the step.'
+    description: 'Output from the step'
 runs:
   using: 'docker'
   image: 'docker://nulix/builder:os'
