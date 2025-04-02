@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-STEP="do_$1"
+STEP="do_$INPUT_STEP_NAME"
 
 do_fetch-base-os() {
   source /nulix-os-venv/bin/activate
@@ -29,3 +29,7 @@ do_inject-apps() {
   OSTREE_COMMIT_MSG="Added custom compose apps"
   nulix build ostree-repo
 }
+
+# Execute the step
+echo "Running step: $STEP"
+$STEP
