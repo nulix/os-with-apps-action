@@ -9,10 +9,10 @@ runs:
     - name: Fetch base NULIX OS
       uses: 'docker://nulix/builder:os'
       with:
-        entrypoint: echo
-        args: 1234567890
-    - name: Fetch base NULIX OS
+        entrypoint: entrypoint.sh
+        args: fetch-base-os
+    - name: Inject custom apps
       uses: 'docker://nulix/builder:os'
       with:
-        entrypoint: echo
-        args: 0987654321
+        entrypoint: entrypoint.sh
+        args: inject-apps
