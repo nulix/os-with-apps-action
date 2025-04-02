@@ -7,7 +7,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build and Deploy NULIX OS with apps
-        id: build-and-deploy
+      - name: Fetch base NULIX OS
+        id: fetch-base-os
+        with:
+          step_name: 'fetch-base-os'
+          machine: 'rpi3'
+        uses: ./ # Uses an action in the root directory
+        # uses: nulix/os-with-apps-action@v0.0.1-alpha
+      - name: Inject custom apps
+        id: inject-apps
+        with:
+          step_name: 'fetch-base-os'
+          machine: 'rpi3'
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
