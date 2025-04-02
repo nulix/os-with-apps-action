@@ -16,6 +16,10 @@ inputs:
     description: 'Distro name'
     required: false
     default: 'nulix-docker'
+  compose_file:
+    description: 'Docker compose YAML file name'
+    required: false
+    default: 'docker-compose.yml'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -23,3 +27,4 @@ runs:
     - ${{ inputs.step_name }}
     - ${{ inputs.machine }}
     - ${{ inputs.distro }}
+    - ${{ inputs.compose_file }}
