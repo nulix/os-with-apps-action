@@ -17,7 +17,14 @@ jobs:
       - name: Inject custom apps
         id: inject-apps
         with:
-          step_name: 'fetch-base-os'
+          step_name: 'inject-apps'
+          machine: 'rpi3'
+        uses: ./ # Uses an action in the root directory
+        # uses: nulix/os-with-apps-action@v0.0.1-alpha
+      - name: Build OS image
+        id: build-os-image
+        with:
+          step_name: 'build-os-image'
           machine: 'rpi3'
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
