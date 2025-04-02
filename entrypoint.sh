@@ -38,8 +38,9 @@ do_fetch_base_os() {
 
 do_inject_apps() {
   cd nulix-os
-  cp ../$COMPOSE_FILE rootfs/apps
-  echo '------------------' && ls -lh rootfs && ls -lh rootfs/apps && cat rootfs/apps/$COMPOSE_FILE && echo '------------------'
+  mkdir rootfs/apps
+  cp ../$COMPOSE_FILE rootfs/apps/docker-compose.yml
+  echo '------------------' && ls -lh rootfs && ls -lh rootfs/apps && cat rootfs/apps/docker-compose.yml && echo '------------------'
   MACHINE=$MACHINE DISTRO=$DISTRO source tools/setup-environment
   OSTREE_COMMIT_MSG="Added custom compose apps"
   nulix build ostree-repo
