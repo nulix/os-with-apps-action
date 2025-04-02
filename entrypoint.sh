@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 set -o errexit
-set -o nounset
 set -o pipefail
 
 STEP_NAME="$INPUT_STEP_NAME"
