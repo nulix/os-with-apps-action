@@ -17,7 +17,5 @@ outputs:
     description: 'Output from the step'
 runs:
   using: 'docker'
-  image: 'docker://nulix/builder:os'
-  entrypoint: '/entrypoint.sh'
-  volumes:
-    - ${{ github.workspace }}/entrypoint.sh:/entrypoint.sh
+  image: 'Dockerfile'
+  entrypoint: 'entrypoint.sh'
