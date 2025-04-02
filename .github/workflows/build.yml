@@ -12,17 +12,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          sparse-checkout: action.yml
+          sparse-checkout: |
+            action.yml
+            docker-compose.yml
       - name: Fetch base NULIX OS
         uses: ./ # Uses an action in the root directory
         with:
           step_name: fetch-base-os
           machine: ${{ env.MACHINE }}
-      # - name: Inject custom apps
-      #   uses: ./ # Uses an action in the root directory
-      #   with:
-      #     step_name: inject-apps
-      #     machine: ${{ env.MACHINE }}
+      - name: Inject custom apps
+        uses: ./ # Uses an action in the root directory
+        with:
+          step_name: inject-apps
+          machine: ${{ env.MACHINE }}
       # - name: Build OS image
       #   uses: ./ # Uses an action in the root directory
       #   with:
