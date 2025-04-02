@@ -34,6 +34,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy NULIX OS with apps
+    steps:
       - name: Upload OS image
         id: upload-os-image
         uses: actions/upload-artifact@v4
