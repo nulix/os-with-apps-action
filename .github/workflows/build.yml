@@ -32,6 +32,7 @@ jobs:
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
   deploy:
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     name: Deploy NULIX OS with apps
     steps:
