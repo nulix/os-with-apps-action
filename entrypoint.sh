@@ -3,19 +3,21 @@
 set -o errexit
 set -o pipefail
 
-STEP_NAME="$INPUT_STEP_NAME"
+STEP_NAME=$(echo "$INPUT_STEP_NAME" | tr '-' '_')
 MACHINE="$INPUT_MACHINE"
 DISTRO="$INPUT_DISTRO"
+NULIX_OS_VER="1.3.0"
 
-echo "================================================="
-echo "================ Input variables ================"
-echo "================================================="
-echo "Running step: $STEP_NAME"
+echo "================================================"
+echo "============ Action Input Variables ============"
+echo "================================================"
+echo "Step: $STEP_NAME"
 echo "Machine: $MACHINE"
 echo "Distro: $DISTRO"
-echo "================================================="
+echo "NULIX OS version: $NULIX_OS_VER"
+echo "================================================"
 
-do_fetch-base-os() {
+do_fetch_base_os() {
   source /nulix-os-venv/bin/activate
   west init -m https://github.com/nulix/nulix-os.git nulix-os
   cd nulix-os
@@ -32,11 +34,21 @@ do_fetch-base-os() {
   rm -f rootfs/$OSTREE_REPO.tar.gz
 }
 
-do_inject-apps() {
+do_inject_apps() {
   cd nulix-os
   MACHINE=$MACHINE DISTRO=$DISTRO source tools/setup-environment
   OSTREE_COMMIT_MSG="Added custom compose apps"
   nulix build ostree-repo
+}
+
+do_build_os_image() {
+  cd nulix-os
+  MACHINE=$MACHINE DISTRO=$DISTRO source tools/setup-environment
+  cd build/deploy/$MACHINE
+  wget https://files.0xff.com.hr/$MACHINE/boot-artifacts-v2025.01.tar.gz
+  wget https://files.0xff.com.hr/$MACHINE/kernel-artifacts-rpi-6.6.y.tar.gz
+  cd ../../..
+  nulix build image
 }
 
 do_$STEP_NAME
