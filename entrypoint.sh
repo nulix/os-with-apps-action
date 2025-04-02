@@ -6,7 +6,7 @@ set -o pipefail
 STEP_NAME=$(echo "$INPUT_STEP_NAME" | tr '-' '_')
 MACHINE="$INPUT_MACHINE"
 DISTRO="$INPUT_DISTRO"
-NULIX_OS_VER="1.3.0"
+NULIX_OS_VER="1.3.1"
 
 echo "================================================"
 echo "============ Action Input Variables ============"
