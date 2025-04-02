@@ -28,3 +28,10 @@ jobs:
           machine: 'rpi3'
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
+      - name: Upload OS image
+        id: upload-os-image
+        uses: actions/upload-artifact@v4
+        with:
+          name: nulix-os-v1.3.0
+          path: nulix-os/build/deploy/rpi3/nulix-os-1.3.0.img.bz2
+          retention-days: 7  # Keep the artifact for 7 days
