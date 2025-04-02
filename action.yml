@@ -6,13 +6,12 @@ branding:
 runs:
   using: 'composite'
   steps:
-    - name: Fetch base NULIX OS
-      uses: 'docker://nulix/builder:os'
-      with:
-        entrypoint: entrypoint.sh
-        args: fetch-base-os
+    - id: entrypoint
+      name: Run entrypoint.sh
+      run: entrypoint.sh fetch-base-os
+      shell: bash
     - name: Inject custom apps
       uses: 'docker://nulix/builder:os'
       with:
-        entrypoint: entrypoint.sh
-        args: inject-apps
+        entrypoint: echo
+        args: 1234567890
