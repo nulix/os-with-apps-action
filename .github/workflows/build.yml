@@ -1,6 +1,7 @@
 on: [push]
 
 env:
+  MACHINE: rpi3
   NULIX_OS_VER: 1.3.0
 
 jobs:
@@ -14,32 +15,27 @@ jobs:
         id: fetch-base-os
         with:
           step_name: 'fetch-base-os'
-          machine: 'rpi3'
+          machine: ${{ env.MACHINE }}
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
       - name: Inject custom apps
         id: inject-apps
         with:
           step_name: 'inject-apps'
-          machine: 'rpi3'
+          machine: ${{ env.MACHINE }}
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
       - name: Build OS image
         id: build-os-image
         with:
           step_name: 'build-os-image'
-          machine: 'rpi3'
+          machine: ${{ env.MACHINE }}
         uses: ./ # Uses an action in the root directory
         # uses: nulix/os-with-apps-action@v0.0.1-alpha
-  deploy:
-    needs: build-and-deploy
-    runs-on: ubuntu-latest
-    name: Deploy NULIX OS with apps
-    steps:
       - name: Upload OS image
         id: upload-os-image
         uses: actions/upload-artifact@v4
         with:
-          name: nulix-os-v1.3.0
-          path: nulix-os/build/deploy/rpi3/nulix-os-1.3.0.img.bz2
+          name: nulix-os-${{ env.NULIX_OS_VER }}
+          path: nulix-os/build/deploy/${{ env.MACHINE }}/nulix-os-${{ env.NULIX_OS_VER }}.img.bz2
           retention-days: 7  # Keep the artifact for 7 days
