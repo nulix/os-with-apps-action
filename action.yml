@@ -5,18 +5,18 @@ branding:
   color: 'gray-dark'
 runs:
   using: 'composite'
+  image: 'docker://nulix/builder:os'
   steps:
     - name: Set GitHub Path
       run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
       shell: bash
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
-    - id: entrypoint
-      name: Run entrypoint.sh
+    - name: Fetch base NULIX OS
+      id: fetch-base-os
       run: entrypoint.sh fetch-base-os
       shell: bash
     - name: Inject custom apps
-      uses: 'docker://nulix/builder:os'
-      with:
-        entrypoint: echo
-        args: 1234567890
+      id: inject-apps
+      run: entrypoint.sh inject-apps
+      shell: bash
