@@ -4,12 +4,18 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+STEP_NAME="$INPUT_STEP_NAME"
+MACHINE="$INPUT_MACHINE"
+
+echo "Running step: $STEP_NAME"
+echo "Machine: $MACHINE"
+
 do_fetch-base-os() {
   source /nulix-os-venv/bin/activate
   west init -m https://github.com/nulix/nulix-os.git nulix-os
   cd nulix-os
   west update
-  source tools/setup-environment
+  $MACHINE source tools/setup-environment
   cd build/deploy/$MACHINE
   wget https://files.0xff.com.hr/$MACHINE/$OSTREE_ROOTFS-$NULIX_OS_VER.tar.gz
   wget https://files.0xff.com.hr/$MACHINE/$OSTREE_REPO.tar.gz
@@ -23,11 +29,9 @@ do_fetch-base-os() {
 
 do_inject-apps() {
   cd nulix-os
-  source tools/setup-environment
+  $MACHINE source tools/setup-environment
   OSTREE_COMMIT_MSG="Added custom compose apps"
   nulix build ostree-repo
 }
 
-# Execute the step
-echo "Running step: $INPUT_STEP_NAME"
-do_$INPUT_STEP_NAME
+do_$STEP_NAME
