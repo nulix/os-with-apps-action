@@ -20,7 +20,7 @@ jobs:
           step_name: fetch-base-os
           machine: ${{ env.MACHINE }}
       - name: Test vars
-        run: echo $INPUT_BASE_OS_VER
+        run: printenv
       # - name: Fetch base NULIX OS
       #   uses: ./
       #   with:
