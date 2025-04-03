@@ -19,6 +19,8 @@ echo "COMPOSE_FILE: $COMPOSE_FILE"
 echo "NULIX_OS_VER: $NULIX_OS_VER"
 echo "================================================"
 
+echo "NULIX_OS_VER=${NULIX_OS_VER}" >> $GITHUB_ENV
+
 do_fetch_base_os() {
   source /nulix-os-venv/bin/activate
   west init -m https://github.com/nulix/nulix-os.git nulix-os
