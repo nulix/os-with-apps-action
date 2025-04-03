@@ -7,16 +7,16 @@ STEP_NAME=$(echo "$INPUT_STEP_NAME" | tr '-' '_')
 MACHINE="$INPUT_MACHINE"
 DISTRO="$INPUT_DISTRO"
 COMPOSE_FILE="$INPUT_COMPOSE_FILE"
-NULIX_OS_VER="1.3.1"
+NULIX_OS_VER="$INPUT_BASE_OS_VER"
 
 echo "================================================"
 echo "============ Action Input Variables ============"
 echo "================================================"
-echo "STEP:             $STEP_NAME"
-echo "MACHINE:          $MACHINE"
-echo "DISTRO:           $DISTRO"
-echo "COMPOSE FILE:     $COMPOSE_FILE"
-echo "NULIX OS version: $NULIX_OS_VER"
+echo "STEP_NAME:    $STEP_NAME"
+echo "MACHINE:      $MACHINE"
+echo "DISTRO:       $DISTRO"
+echo "COMPOSE_FILE: $COMPOSE_FILE"
+echo "NULIX_OS_VER: $NULIX_OS_VER"
 echo "================================================"
 
 do_fetch_base_os() {
